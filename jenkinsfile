@@ -17,11 +17,6 @@ pipeline {
             deploy adapters: [tomcat8(credentialsId: '971c219b-f023-43be-8293-facbe525cc31', path: '', url: 'http://192.168.1.8:8081/')], contextPath: null, war: 'target/*.war'
             }
         }
-    post {
-      always {
-        // One or more steps need to be included within each condition's block.
-        emailext body: '${FILE,path="email.html"}', subject: 'test', to: 'odin1229@163.com'
-         }
-      }
+
     }
 }
