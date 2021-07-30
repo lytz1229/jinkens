@@ -21,7 +21,7 @@ pipeline {
      post {
        always {
          // One or more steps need to be included within each condition's block.
-         emailext body: '${FILE,path="email.html"}', subject: '项目名：$:{PROJECT_NAME}', to: 'odin1229@163.com'
+         emailext body: '${FILE,path="email.html"}', subject: '项目名：${PROJECT_NAME}', to: 'odin1229@163.com'
        }
      }
 }
