@@ -1,3 +1,7 @@
+def tag="1.0-SNAPSHOT"
+def server_url="192.168.1.210:85"
+
+
 pipeline {
     agent any
 
@@ -11,6 +15,8 @@ pipeline {
         stage('docker镜像') {
                 steps {
               sh 'mvn clean package dockerfile:build'
+              def docker_name="${project_name}:${tag}"
+              sh 'docker tag ${docker_name} ${server_url}/docker/{docker_name}'
              }
         }
     }
