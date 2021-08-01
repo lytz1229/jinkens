@@ -14,10 +14,10 @@ pipeline {
 
         stage('docker镜像') {
                 steps {
-              sh 'mvn clean package dockerfile:build'
+
               def docker_name="${project_name}:${tag}"
               sh 'docker tag ${docker_name} ${server_url}/docker/{docker_name}'
-             }
+            }
         }
     }
 }
