@@ -9,7 +9,7 @@ pipeline {
         }
 
         stage('docker镜像') {
-              sh “mvn -f maventest clean package dockerfile:build”
+              sh “mvn clean package dockerfile:build”
              }
 
     }
