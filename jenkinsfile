@@ -16,7 +16,7 @@ pipeline {
                 steps {
 
 
-              sh 'docker tag maventest:1.0-SNAPSHOT 192.168.1.210:85/docker/maventest'
+              sh 'docker tag ${docker_name}:${tag} server_url/docker/${docker_name}'
             }
         }
     }
