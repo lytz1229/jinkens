@@ -14,20 +14,20 @@ pipeline {
             }
         }
 
-        stage('docker镜像') {
-                steps {
+       // stage('docker镜像') {
+       //         steps {
 
                 //docker打标签
-             sh "docker tag ${docker_name} ${server_url}/docker/${docker_name}"
+       //      sh "docker tag ${docker_name} ${server_url}/docker/${docker_name}"
                 //登录harbor
-             withCredentials([usernamePassword(credentialsId: "${harbor_login}", passwordVariable: 'password', usernameVariable: 'username')]) {
-             sh "docker login -u ${username} -p ${password} ${server_url}"
+       //      withCredentials([usernamePassword(credentialsId: "${harbor_login}", passwordVariable: 'password', usernameVariable: 'username')]) {
+       //      sh "docker login -u ${username} -p ${password} ${server_url}"
                 //push镜像
-             sh "docker push ${server_url}/docker/${docker_name}"
+       //      sh "docker push ${server_url}/docker/${docker_name}"
 
-             }
+       //      }
 
-        sshPublisher(publishers: [sshPublisherDesc(configName: 'k8snode', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: "/opt/shell/deploy.sh $server_url $docker_name", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+        sshPublisher(publishers: [sshPublisherDesc(configName: 'k8snode', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: "mkdir /opt/aaa", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
 
             }
         }
