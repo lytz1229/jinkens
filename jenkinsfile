@@ -16,7 +16,7 @@ pipeline {
                 steps {
 
 
-              sh 'docker tag ${docker_name}:${tag} server_url/docker/${docker_name}'
+              sh 'docker tag ${docker_name} server_url/docker/${docker_name}'
             }
         }
     }
