@@ -7,14 +7,10 @@ pipeline {
                  checkout([$class: 'GitSCM', branches: [[name: '*/729']], extensions: [], userRemoteConfigs: [[credentialsId: '0dea279d-eebe-41e4-9d8a-4abc10164d3a', url: 'https://github.com/lytz1229/jinkens.git']]])
             }
         }
-        stage('build') {
-            steps {
-            sh 'mvn clean package'
-            }
-        }
+
         stage('docker镜像') {
               sh “mvn -f maventest clean package dockerfile:build”
              }
-        }
+
     }
 }
