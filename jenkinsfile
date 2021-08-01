@@ -1,6 +1,8 @@
 def tag="1.0-SNAPSHOT"
 def server_url="192.168.1.210:85"
 def docker_name="maventest:${tag}"
+//登录信息
+def harbor_login="14634cc5-3674-44a3-9a6d-6ce5c4f6dbfd"
 
 pipeline {
     agent any
@@ -17,6 +19,14 @@ pipeline {
 
 
              sh "docker tag ${docker_name} ${server_url}/docker/${docker_name}"
+
+             withCredentials([usernamePassword(credentialsId: '${harbor_login}', passwordVariable: 'password', usernameVariable: 'username')]) {
+             sh "docker login -u ${username} -p ${password} ${server_url}"
+
+             sh "docker push ${server_url}/docker/${docker_name}"
+
+             }
+
             }
         }
     }
