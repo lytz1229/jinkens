@@ -20,7 +20,7 @@ pipeline {
 
              sh "docker tag ${docker_name} ${server_url}/docker/${docker_name}"
 
-             withCredentials([usernamePassword(credentialsId: '${harbor_login}', passwordVariable: 'password', usernameVariable: 'username')]) {
+             withCredentials([usernamePassword(credentialsId: "${harbor_login}", passwordVariable: 'password', usernameVariable: 'username')]) {
              sh "docker login -u ${username} -p ${password} ${server_url}"
 
              sh "docker push ${server_url}/docker/${docker_name}"
